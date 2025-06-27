@@ -1,50 +1,101 @@
-# Welcome to your Expo app 👋
+# AI Travel App 🌍✈️
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+![React Native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Expo](https://img.shields.io/badge/Expo-000020?style=for-the-badge&logo=expo&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+![Google AI](https://img.shields.io/badge/Google_AI-4285F4?style=for-the-badge&logo=google&logoColor=white)
 
-## Get started
+AI Travel App is a modern mobile application that leverages artificial intelligence to provide personalized travel recommendations and trip planning. Built with React Native and Expo, it helps travelers discover destinations, create detailed itineraries, and manage their trips—all enhanced by Google's Gemini AI.
 
-1. Install dependencies
+## ✨ Features
 
+- **AI-Powered Recommendations**: Get personalized destination suggestions based on your interests, budget, and travel preferences
+- **Detailed Trip Planning**: View comprehensive trip plans including daily activities, must-see attractions, and local tips
+- **Trip Management**: Save, organize, and access your trips anytime
+- **User Authentication**: Secure account creation and login with Firebase
+- **Budget Estimates**: Get cost estimates for your trips to help with financial planning
+- **Offline Access**: View your saved trips even without an internet connection
+
+## 📱 Screenshots
+
+<table>
+  <tr>
+    <td><img src="./assets/images/signin.png" alt="Sign In Screen" width="250"/></td>
+    <td><img src="./assets/images/mytrip.png" alt="My Trip Screen" width="250"/></td>
+  </tr>
+  <tr>
+    <td align="center">Sign In Screen</td>
+    <td align="center">My Trip Screen</td>
+  </tr>
+</table>
+
+## 🚀 Installation
+
+### Prerequisites
+
+- Node.js (v14 or newer)
+- npm or yarn
+- Expo CLI (`npm install -g expo-cli`)
+
+### Setup
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/yourusername/ai-travel-app.git
+   cd ai-travel-app
+   ```
+
+2. Install dependencies
    ```bash
    npm install
    ```
 
-2. Start the app
+3. Set up environment variables
 
-   ```bash
-    npx expo start
+   Create a `.env` file in the root directory with the following variables:
+   ```
+   EXPO_PUBLIC_GEMINI_API_KEY=YOUR_GEMINI_API_KEY_HERE
    ```
 
-In the output, you'll find options to open the app in a
+4. Start the development server
+   ```bash
+   npx expo start
+   ```
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 📖 Usage
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+1. **Sign Up/Login**: Create an account or log in to access all features
+2. **Discover**: Browse AI-recommended destinations based on your preferences
+3. **Create Trip**: Select a destination and get AI-generated trip plans
+4. **My Trips**: View and manage your saved trips
+5. **Trip Details**: Access comprehensive information about each destination
 
-## Get a fresh project
+## 🛠️ Technologies Used
 
-When you're ready, run:
+- **Frontend**: React Native, Expo
+- **Navigation**: Expo Router (file-based routing)
+- **State Management**: React Context API
+- **Authentication & Database**: Firebase (Authentication, Firestore)
+- **AI Integration**: Google Gemini AI
+- **Location Services**: Google Places API
 
-```bash
-npm run reset-project
-```
+## 🤝 Contributing
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## Learn more
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-To learn more about developing your project with Expo, look at the following resources:
+## 📄 License
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Join the community
+## 🙏 Acknowledgements
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [Expo](https://expo.dev/) for the amazing development platform
+- [Firebase](https://firebase.google.com/) for authentication and database services
+- [Google Gemini AI](https://ai.google.dev/) for powering the AI recommendations
+- [React Native](https://reactnative.dev/) for the mobile framework

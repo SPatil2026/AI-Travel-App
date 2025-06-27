@@ -1,11 +1,9 @@
-import { View, Text, TextInput, StyleSheet, ToastAndroid } from 'react-native'
+import { View, Text, TextInput, StyleSheet, ToastAndroid, Pressable } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useNavigation, useRouter } from 'expo-router'
 import { Colors } from './../../../constants/Colors'
-import { TouchableOpacity } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { auth } from '../../../configs/FirebaseConfig';
-import { createUserWithEmailAndPassword } from 'firebase/auth/cordova';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 
 export default function SignUp() {
   const navigation=useNavigation();
@@ -23,25 +21,42 @@ export default function SignUp() {
 
   const OnCreateAccount=()=>{
 
-    if(!email&&!password&&!fullName){
+    if(!email || !password || !fullName){
       ToastAndroid.show('Please enter all details',ToastAndroid.BOTTOM)
       return;
     }
 
+    // Password validation
+    if(password.length < 6) {
+      ToastAndroid.show('Password must be at least 6 characters',ToastAndroid.BOTTOM)
+      return;
+    }
+
+    // Show loading indicator or disable button here if needed
+    const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed up 
-    const user = userCredential.user;
-    console.log(user);
-    router.replace('/mytrip')
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage,errorCode);
-    // ..
-  });
+      .then((userCredential) => {
+        // Signed up - Firebase will handle persistence automatically
+        const user = userCredential.user;
+        console.log('User created:', user.email);
+        router.replace('/mytrip')
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage, errorCode);
+        
+        // Handle different error codes
+        if(errorCode === 'auth/email-already-in-use'){
+          ToastAndroid.show("Email already in use", ToastAndroid.LONG);
+        } else if(errorCode === 'auth/invalid-email') {
+          ToastAndroid.show("Invalid email address", ToastAndroid.LONG);
+        } else if(errorCode === 'auth/weak-password') {
+          ToastAndroid.show("Password is too weak", ToastAndroid.LONG);
+        } else {
+          ToastAndroid.show("Sign up failed. Please try again.", ToastAndroid.LONG);
+        }
+      });
 
   }
 
@@ -52,9 +67,9 @@ export default function SignUp() {
       backgroundColor:Colors.WHITE,
       height:'100%'
     }}>
-      <TouchableOpacity onPress={()=>router.back()}>
+      <Pressable onPress={()=>router.back()}>
         <Ionicons name="arrow-back" size={24} color="black" />
-      </TouchableOpacity>
+      </Pressable>
 
       <Text style={{
         fontFamily:'outfit-bold',
@@ -73,6 +88,7 @@ export default function SignUp() {
         style={styles.input} 
         placeholder='Enter Full Name'
         onChangeText={(value)=>setFullName(value)}
+        verticalAlign="middle"
         />
       </View>
 
@@ -87,6 +103,7 @@ export default function SignUp() {
         style={styles.input} 
         placeholder='Enter Email'
         onChangeText={(value)=>setEmail(value)}
+        verticalAlign="middle"
         />
       </View>
       
@@ -102,11 +119,12 @@ export default function SignUp() {
         style={styles.input} 
         placeholder='Enter Password'
         onChangeText={(value)=>setPassword(value)}
+        verticalAlign="middle"
         />
       </View>
 
       {/* Create account button */}
-      <TouchableOpacity onPress={OnCreateAccount} style={{
+      <Pressable onPress={OnCreateAccount} style={{
         backgroundColor:Colors.PRIMARY,
         padding:20,
         borderRadius:15,
@@ -116,10 +134,10 @@ export default function SignUp() {
           color:Colors.WHITE,
           textAlign:'center'
         }}>Create Account</Text>
-      </TouchableOpacity>
+      </Pressable>
 
       {/* Sign in button */}
-      <TouchableOpacity 
+      <Pressable 
       onPress={()=>router.replace('/(auth)/sign-in')}
       style={{
         backgroundColor:Colors.WHITE,
@@ -132,7 +150,7 @@ export default function SignUp() {
           color:Colors.PRIMARY,
           textAlign:'center'
         }}>Sign In</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   )
 }

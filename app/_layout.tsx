@@ -1,5 +1,7 @@
 import { Stack } from "expo-router";
 import { useFonts } from 'expo-font';
+import { TripProvider } from '../context/TripContext';
+import { AuthProvider } from '../context/AuthContext';
 
 export default function RootLayout() {
 
@@ -10,12 +12,14 @@ export default function RootLayout() {
   })
 
   return (
-    <Stack screenOptions={{
-      headerShown: false
-    }}>
-      {/* <Stack.Screen name="index" options={{headerShown:false}}/> */}
-      <Stack.Screen name="(tabs)" />
-      <Stack.Screen name="create-trip" />
-    </Stack>
+    <AuthProvider>
+      <TripProvider>
+        <Stack screenOptions={{
+          headerShown: false
+        }}>
+          <Stack.Screen name="index" options={{headerShown:false}}/>
+        </Stack>
+      </TripProvider>
+    </AuthProvider>
   );
 }
